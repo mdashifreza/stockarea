@@ -14,6 +14,9 @@ function EditForm() {
 
     const [spaceAvailable, setSpaceAvailable] = useState("");
     const [cluster, setCluster] = useState("");
+    const [city, setCity] = useState("");
+    const [name, setName_warehouse] = useState("");
+    const [live, SetLive] = useState(Boolean);
 
     const filterValue = warehouseDetails.find((item) =>
         item.id === parseInt(id)
@@ -30,14 +33,31 @@ function EditForm() {
         setCluster(e.target.value.toString());
     };
 
+    const handleCity = (e) => {
+        setCity(e.target.value.toString());
+    }
+
+    const handleName = (e) => {
+        setName_warehouse(e.target.value.toString())
+    }
+
     const handleSpaceAvailableChange = (e) => {
         setSpaceAvailable(Number(e.target.value));
     };
+
+    const handleLive = (e)=>{
+        const selectedValue = e.target.value;
+        const isSpaceAvailable = selectedValue === "true";
+        SetLive(isSpaceAvailable)
+    }
 
     const handleSave = () => {
         const updatedData = {
             ...filterValue,
             cluster,
+            city,
+            name,
+            is_live: live,
             space_available: spaceAvailable,
         };
         // Save edited data to local storage
@@ -68,6 +88,8 @@ function EditForm() {
                         type="text"
                         id="city"
                         className="border-2 rounded-md border-gray-400 focus:outline-none focus:border-black px-4 py-2"
+                        value={city}
+                        onChange={handleCity}
                     />
                 </div>
                 <div className="flex flex-col mb-4">
@@ -76,6 +98,8 @@ function EditForm() {
                         type="text"
                         id="city"
                         className="border-2 rounded-md border-gray-400 focus:outline-none focus:border-black px-4 py-2"
+                        value={name}
+                        onChange={handleName}
                     />
                 </div>
                 <div className="flex flex-col mb-4">
@@ -90,11 +114,15 @@ function EditForm() {
                 </div>
                 <div className="flex flex-col mb-4">
                     <label htmlFor="city" className="mb-2 font-semibold">Warehouse Live:</label>
-                    <input
-                        type="text"
-                        id="city"
+                    <select
+                        id="spaceAvailable"
                         className="border-2 rounded-md border-gray-400 focus:outline-none focus:border-black px-4 py-2"
-                    />
+                        value={live}
+                        onChange={handleLive}
+                    >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
                 </div>
             </form>
             <button className="bg-red-400 font-bold p-2 rounded-sm w-full" onClick={handleSave}>Save</button>

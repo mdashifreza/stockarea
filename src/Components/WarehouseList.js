@@ -8,7 +8,6 @@ function WarehouseList({ warehouseDetails }) {
     const [selectedCluster, setSelectedCluster] = useState('');
     const [selectedSquareFit, setSelectedSquareFit] = useState(0)
     const [filterWarehouse, setFilterWarehouse] = useState([]);
-
     // Use useMemo to compute the filtered list only when warehouseDetails or searchTerm changes
     const filteredWarehouses = useMemo(() => {
         let filteredList = warehouseDetails;
@@ -80,12 +79,12 @@ function WarehouseList({ warehouseDetails }) {
 
     return (
         <div className="bg-white shadow-md p-4 mb-4 rounded-md m-10">
-            <h1>Warehouse Details</h1>
+            <h1 className='mb-2'><strong>Warehouse Details </strong></h1>
             <SearchFuntionality searchTerm={searchTerm} handleSearch={handleSearch}/>
-            <div>
+            <div className='mt-2'>
                 <label>
-                    Filter by City:
-                    <select value={selectedCity} onChange={handleCityFilterChange}>
+                    <strong> Filter by:</strong>
+                    <select value={selectedCity} onChange={handleCityFilterChange} className='bg-gray-400 rounded-sm p-0.5'>
                         <option value="">All Cities</option>
                         {/* Assuming warehouseDetails is an array of objects with a 'city' property */}
                         {Array.from(new Set(warehouseDetails.map((warehouse) => warehouse.city))).map((city, index) => (
@@ -94,8 +93,7 @@ function WarehouseList({ warehouseDetails }) {
                     </select>
                 </label>
                 <label>
-                    Filter by Cluster:
-                    <select value={selectedCluster} onChange={handleClusterFilter}>
+                    <select value={selectedCluster} onChange={handleClusterFilter} className='bg-gray-400 rounded-sm ml-2 p-0.5'>
                         <option value="">All Cluster</option>
                         {/* Assuming warehouseDetails is an array of objects with a 'city' property */}
                         {Array.from(new Set(warehouseDetails.map((warehouse) => warehouse.cluster))).map((cluster, index) => (
@@ -104,8 +102,7 @@ function WarehouseList({ warehouseDetails }) {
                     </select>
                 </label>
                 <label>
-                    Filter by Space Available:
-                    <select value={selectedSquareFit} onChange={handleSpaceFilter}>
+                    <select value={selectedSquareFit} onChange={handleSpaceFilter} className='bg-gray-400 rounded-sm ml-2 p-0.5'>
                         <option value="">All Space_available</option>
                         {/* Assuming warehouseDetails is an array of objects with a 'city' property */}
                         {Array.from(new Set(warehouseDetails.map((warehouse) => warehouse.space_available))).map((space, index) => (
@@ -114,7 +111,7 @@ function WarehouseList({ warehouseDetails }) {
                     </select>
                 </label>
             </div>
-            <ul>
+            <ul className=''>
                 {searchTerm.length === 0
                     ? filterWarehouse.map((warehouse, index) => (
                         <WarehouseCard key={index} warehouse={warehouse} buttonProps = {"View Details"} />
@@ -122,10 +119,10 @@ function WarehouseList({ warehouseDetails }) {
                     : filterWarehouse.map((warehouse, index) => (
                         <WarehouseCard key={index} warehouse={warehouse} buttonProps = {"View Details"} />
                     ))}
-                {isLocalStorageDataAvailable && (
-            <button className='bg-blue-500 p-2 text-white' onClick={clearLocalStorageData}>Clear Local Storage Data</button>
-        )}
             </ul>
+            {isLocalStorageDataAvailable && (
+            <button className='bg-red-400 font-bold p-2 rounded-sm w-full mt-2' onClick={clearLocalStorageData}>Clear Local Storage Data</button>
+        )}
         </div>
     );
 }
