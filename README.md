@@ -37,12 +37,13 @@ The app uses data from `warehouses.json` shared with this repository to populate
 
 Follow these steps to run the app locally:
 
-1. Clone this repository:
+1. ### `Clone this repository`:
 
    ```bash
    git clone <https://github.com/mdashifreza/stockarea.git>
-
-2. ### `npm start`
+2. ### `npm install`
+   This command will automatically install all the necessary dependencies listed in `package.json`.
+4. ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
