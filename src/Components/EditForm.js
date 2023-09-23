@@ -63,7 +63,7 @@ function EditForm() {
                     />
                 </div>
                 <div className="flex flex-col mb-4">
-                    <label htmlFor="city" className="mb-2 font-semibold">City:</label>
+                    <label htmlFor="city" className="mb-2 font-semibold">City </label>
                     <input
                         type="text"
                         id="city"
